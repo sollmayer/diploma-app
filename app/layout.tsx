@@ -31,7 +31,7 @@ export default function RootLayout({
           </SignedIn>
           <ThemeProvider 
           attribute="class" 
-          defaultTheme="dark" 
+          defaultTheme="dark"
           enableSystem={false}
           storageKey="diploma-app-theme">
             {children}
