@@ -5,6 +5,7 @@ import { ClerkProvider,SignedIn,SignedOut,SignInButton, UserButton } from "@cler
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { SocketProvider } from "@/components/providers/socket-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -35,8 +36,10 @@ export default function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
           storageKey="diploma-app-theme">
-            <ModalProvider/>
-            {children}
+            <SocketProvider>
+              <ModalProvider/>
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
