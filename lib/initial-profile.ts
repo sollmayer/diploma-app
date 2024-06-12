@@ -1,5 +1,4 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { RedirectToSignIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 

@@ -2,8 +2,9 @@
 import { ServerWithMembersWithProfiles } from "@/types";
 import { MemberRole } from "@prisma/client";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, UserPlus2, Users } from "lucide-react";
+import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
+import { useParams, useRouter } from "next/navigation"; // Import the useRouter hook
 
 interface ServerHeaderProps {
     server: ServerWithMembersWithProfiles;
@@ -12,9 +13,15 @@ interface ServerHeaderProps {
 
 export const ServerHeader = ({server, role}:ServerHeaderProps) => {
     const {onOpen} = useModal();
+    const router = useRouter(); // Initialize the useRouter hook
 
     const isAdmin = role === MemberRole.ADMIN;
     const isModerator = isAdmin || role === MemberRole.MODERATOR;
+
+    const params = useParams();
+    const redirectToWorkspaces = () => {
+        router.push(`/servers/${server.id}/board`);
+    };
 
     return (
         <DropdownMenu>
@@ -22,7 +29,10 @@ export const ServerHeader = ({server, role}:ServerHeaderProps) => {
                 {server.name}
                 <ChevronDown className="h-5 w-5 ml-auto" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 text-xs font-medium text-black dark: text-neutral-400 space-y-[2px]">
+            <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
+                <DropdownMenuItem onClick={redirectToWorkspaces} className="px-3 py-2 text-sm cursor-pointer">
+                    Workspaces
+                </DropdownMenuItem>
                 {isModerator && (
                     <DropdownMenuItem onClick={()=>onOpen('invite', {server})} className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer">
                         Invite People
@@ -62,6 +72,5 @@ export const ServerHeader = ({server, role}:ServerHeaderProps) => {
                 )}
             </DropdownMenuContent>
         </DropdownMenu>
-    )
+    );
 }
-
