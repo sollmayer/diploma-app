@@ -5,7 +5,7 @@ import { InputType, ReturnType } from "./types";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
-import { UpdateBoardSchema } from "./schema";
+import { UpdateList } from "./schema";
 
 
 const handler = async (data: InputType): Promise<ReturnType> => {
@@ -16,33 +16,33 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       };
     }
   
-    const { title, id } = data;
+    const { title, id,boardId  } = data;
   
-    let board;
+    let list;
     try {
-      board = await db.board.update({
+      list = await db.list.update({
         where: {
           id,
+          boardId,
         },
         data: {
           title,
         },
       });
-    //   await createAuditLog({
-    //     action: ACTION.UPDATE,
-    //     entityId: board.id,
-    //     entityTitle: board.title,
-    //     entityType: ENTITY_TYPE.BOARD,
-    //   });
+  
+      // await createAuditLog({
+      //   entityTitle: list.title,
+      //   entityId: list.id,
+      //   entityType: ENTITY_TYPE.CARD,
+      //   action: ACTION.UPDATE,
+      // })
     } catch (error) {
       return {
-        error: "Failed to update board.",
-      };
+        error: "Failed to update."
+      }
     }
-    revalidatePath(`/board/${board.id}`);
-    return {
-      data: board,
-    };
-  };
+    revalidatePath(`/board/${boardId}`);
+    return { data: list };
+};
   
-  export const updateBoard = createSafeAction(UpdateBoardSchema, handler);
+  export const updateList = createSafeAction(UpdateList, handler);

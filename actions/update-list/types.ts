@@ -1,7 +1,9 @@
 import { z } from "zod";
-import { UpdateBoardSchema } from "./schema";
-import { ActionState } from "@/lib/create-safe-action";
-import { Board } from "@prisma/client";
+import { List } from "@prisma/client";
 
-export type InputType = z.infer<typeof UpdateBoardSchema>;
-export type ReturnType = ActionState<InputType, Board>;
+import { ActionState } from "@/lib/create-safe-action";
+
+import { UpdateList } from "./schema";
+
+export type InputType = z.infer<typeof UpdateList>;
+export type ReturnType = ActionState<InputType, List>;
