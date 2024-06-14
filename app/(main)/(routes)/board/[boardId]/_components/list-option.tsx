@@ -1,4 +1,5 @@
 "use client";
+import { copyList } from "@/actions/copy-list";
 import { deleteList } from "@/actions/delete-list";
 import { FormSubmit } from "@/components/form/form-button";
 import { Button } from "@/components/ui/button";
@@ -54,6 +55,13 @@ export const ListOptions = ({
           toast.error(error);
         }
     });
+
+    const onCopy = (formData: FormData) => {
+      const id = formData.get("id") as string;
+      const boardId = formData.get("boardId") as string;
+  
+      executeCopy({ id, boardId });
+    };
     return (
         <Popover>
           <PopoverTrigger asChild>
