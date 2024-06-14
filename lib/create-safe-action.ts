@@ -9,7 +9,9 @@ export type ActionState<TInput, TOutput> = {
     error?: string | null;
     data?: TOutput;
 };
-
+interface ServerIdPageProps {
+  serverId: string;
+}
 export const createSafeAction = <TInput, TOutput>(
     schema: z.Schema<TInput>,
     handler: (validatedData: TInput) => Promise<ActionState<TInput, TOutput>>

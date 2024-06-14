@@ -20,7 +20,7 @@ export const ServerHeader = ({server, role}:ServerHeaderProps) => {
 
     const params = useParams();
     const redirectToWorkspaces = () => {
-        router.push(`/servers/${server.id}/board`);
+        router.push(`/servers/${server.id}/organization`);
     };
 
     return (

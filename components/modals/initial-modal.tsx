@@ -110,7 +110,7 @@ export const InitialModal = () => {
                                             className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                                             placeholder="Enter room name"
                                             {...field}
-                                            />
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -122,6 +122,7 @@ export const InitialModal = () => {
                                 Create
                             </Button>
                         </DialogFooter>
+                        
                     </form>
                 </Form>
             </DialogContent>
