@@ -38,9 +38,9 @@ export default function RootLayout({
           enableSystem={false}
           storageKey="diploma-app-theme">
             <SocketProvider>
-              <ModalProvider/>
               <QueryProvider>
                 <Toaster/>
+                <ModalProvider/>
                 {children}
               </QueryProvider>
             </SocketProvider>
