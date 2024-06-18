@@ -14,18 +14,11 @@ interface IBoardIdPageProps {
     };
 }
 const BoardIdPage = async ({ params }: IBoardIdPageProps) => {
-    // const { orgId } = auth();
 
-    // if (!orgId) {
-    //   redirect("/select-org");
-    // }
     const { boardId } = params;
     const lists = await db.list.findMany({
         where: {
           boardId: boardId,
-        //   board: {
-        //     orgId,
-        //   },
         },
         include: {
           cards: {

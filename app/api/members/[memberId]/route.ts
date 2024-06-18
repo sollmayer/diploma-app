@@ -23,24 +23,16 @@ export async function PATCH(req:Request, {params}: {params:{memberId:string}}) {
                     update: {
                         where: {
                             id:params.memberId,
-                            profileId:{
-                                not: profile.id
-                            }
+                            profileId:{ not: profile.id }
                         },
-                        data:{
-                            role
-                        }
+                        data:{ role }
                     }
                 }
             },
             include: {
                 members: {
-                    include: {
-                        profile: true,
-                    },
-                    orderBy: {
-                        role: "asc"
-                    }
+                    include: {  profile: true },
+                    orderBy: { role: "asc" }
                 }
             }
         })
@@ -72,20 +64,14 @@ export async function DELETE(req:Request, {params}: {params:{memberId:string}}) 
                 members: {
                     deleteMany: {
                         id: params.memberId,
-                        profileId: {
-                            not: profile.id
-                        }
+                        profileId: { not: profile.id }
                     }
                 }
             },
             include: {
                 members: {
-                    include: {
-                        profile: true,
-                    },
-                    orderBy: {
-                        role: "asc"
-                    }
+                    include: { profile: true },
+                    orderBy: { role: "asc" }
                 }
             }
         })
