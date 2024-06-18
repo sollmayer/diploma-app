@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { DeleteBoardSchema } from "./schema";
 import { redirect } from "next/navigation";
+import { createAuditLog } from "@/lib/create-audit-log";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
 
 const handler = async (data: InputType): Promise<ReturnType> => {
@@ -31,12 +33,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
           id,
         }
       });
-    //   await createAuditLog({
-    //     action: ACTION.UPDATE,
-    //     entityId: board.id,
-    //     entityTitle: board.title,
-    //     entityType: ENTITY_TYPE.BOARD,
-    //   });
+      await createAuditLog({
+        entityId: board.id,
+        entityTitle: board.title,
+        action: ACTION.DELETE,
+        entityType: ENTITY_TYPE.BOARD,
+      });
     } catch (error) {
       return {
         error: "Failed to delete.",

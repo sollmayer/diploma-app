@@ -10,6 +10,8 @@ import { Separator } from "../ui/separator";
 import { ServerSection } from "./server-section";
 import { ServerChannel } from "./server-channel";
 import { ServerMember } from "./server-member";
+import { Button } from "../ui/button";
+import { ServerWorkspace } from "./server-workspace";
 
 interface ServerSidebarProps {
     serverId:string;
@@ -30,7 +32,6 @@ const roleIconMap = {
 export const ServerSidebar = async ({serverId}: ServerSidebarProps) => {
     const profile = await currentProfile();
     if(!profile) redirect("/");
-
     const server = await db.server.findUnique({
         where:{
             id: serverId
@@ -66,6 +67,7 @@ export const ServerSidebar = async ({serverId}: ServerSidebarProps) => {
             <ServerHeader server={server} role={role} />
             <ScrollArea className="flex-1 px-3">
                 <div className="mt-2">
+
                     <ServerSearch data={[
                         {
                             label: "Text Channels",
@@ -106,6 +108,9 @@ export const ServerSidebar = async ({serverId}: ServerSidebarProps) => {
                     ]} />
                 </div>
                 <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
+                <div className="space-y-[2px]">
+                    <ServerWorkspace serverId={serverId} />
+                </div>
                 {!!textChannels?.length && (
                     <div>
                         <ServerSection sectionType="channels" channelType={ChannelType.TEXT} role={role} label="Text Channels" />

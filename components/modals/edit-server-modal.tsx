@@ -83,10 +83,10 @@ export const EditServerModal = () => {
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl text-center font-bold">
-                        Customize your room!
+                        Customize your organization!
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
-                        Give your room a personality with a name and an image. You can always change it later
+                        Give your organization a personality with a name and an image. You can always change it later
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>

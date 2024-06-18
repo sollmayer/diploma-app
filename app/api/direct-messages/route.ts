@@ -21,22 +21,14 @@ export async function GET(req:Request) {
             messages = await db.directMessage.findMany({
                 take:MESSAGES_BATCH,
                 skip:1,
-                cursor: {
-                    id: cursor
-                },
-                where: {
-                    conversationId
-                },
+                cursor: { id: cursor},
+                where: { conversationId },
                 include:{
                     member: {
-                        include: {
-                            profile:true
-                        }
+                        include: { profile:true }
                     }
                 },
-                orderBy: {
-                    createdAt: "desc"
-                }
+                orderBy: { createdAt: "desc" }
             })
         } else {
             messages = await db.directMessage.findMany({
@@ -66,7 +58,6 @@ export async function GET(req:Request) {
         })
         
     } catch (error) {
-        console.log("[[DIRECT_MESSAGES_GET]", error);
         return new NextResponse("Internal Error", {status:500});
     }
 }

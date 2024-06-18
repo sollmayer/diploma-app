@@ -5,9 +5,7 @@ import { db } from "@/lib/db";
 export const initialProfile = async () => {
     const user = await currentUser();
 
-    if(!user){
-        return auth().redirectToSignIn()
-    }
+    if(!user) return auth().redirectToSignIn()
 
     const profile = await db.profile.findUnique({
         where: {
@@ -15,9 +13,7 @@ export const initialProfile = async () => {
         }
     })
 
-    if (profile) {
-        return profile;
-    }
+    if (profile) return profile;
 
     const newProfile = await db.profile.create({
         data: {

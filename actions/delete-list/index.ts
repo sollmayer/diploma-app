@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { DeleteList } from "./schema";
 import { redirect } from "next/navigation";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
+import { createAuditLog } from "@/lib/create-audit-log";
 
 
 const handler = async (data: InputType): Promise<ReturnType> => {
@@ -34,12 +36,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    // await createAuditLog({
-    //   entityTitle: list.title,
-    //   entityId: list.id,
-    //   entityType: ENTITY_TYPE.LIST,
-    //   action: ACTION.DELETE,
-    // })
+    await createAuditLog({
+      entityTitle: list.title,
+      entityId: list.id,
+      entityType: ENTITY_TYPE.LIST,
+      action: ACTION.DELETE,
+    })
   } catch (error) {
     return {
       error: "Failed to delete.",

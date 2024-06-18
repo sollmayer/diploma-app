@@ -28,10 +28,10 @@ export const Info = () => {
         <div className="space-y-1">
         <p className="font-semibold text-xl">{params?.serverId}</p>
         {/* <p className="font-semibold text-xl">{organization?.name}</p> */}
-        <div className="flex items-center text-xs text-muted-foreground">
+        {/* <div className="flex items-center text-xs text-muted-foreground">
           <CreditCard className="h-3 w-3 mr-1 " />
           Free
-        </div>
+        </div> */}
       </div>
       </div>
     )

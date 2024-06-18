@@ -26,5 +26,5 @@ export const createSafeAction = <TInput, TOutput>(
       }
   
       return handler(validationResult.data);
-    };
   };
+}

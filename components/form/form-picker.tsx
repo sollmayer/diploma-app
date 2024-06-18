@@ -24,10 +24,7 @@ export const FormPicker = ({ id, errors }: IFormPickerProps) => {
     useEffect(() => {
         const fetchImages = async () => {
           try {
-            const result = await unsplash.photos.getRandom({
-              collectionIds: ["317099"],
-              count: 9,
-            });
+            const result = await unsplash.photos.getRandom({collectionIds: ["317099"], count: 9});
             if (result && result.response) {
               const responseImages = result.response as Array<Record<string, any>>;
               setImages(responseImages);

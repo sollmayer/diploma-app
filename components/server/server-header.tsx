@@ -13,15 +13,12 @@ interface ServerHeaderProps {
 
 export const ServerHeader = ({server, role}:ServerHeaderProps) => {
     const {onOpen} = useModal();
-    const router = useRouter(); // Initialize the useRouter hook
+    const router = useRouter();
 
     const isAdmin = role === MemberRole.ADMIN;
     const isModerator = isAdmin || role === MemberRole.MODERATOR;
 
     const params = useParams();
-    const redirectToWorkspaces = () => {
-        router.push(`/servers/${server.id}/organization`);
-    };
 
     return (
         <DropdownMenu>
@@ -30,9 +27,7 @@ export const ServerHeader = ({server, role}:ServerHeaderProps) => {
                 <ChevronDown className="h-5 w-5 ml-auto" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
-                <DropdownMenuItem onClick={redirectToWorkspaces} className="px-3 py-2 text-sm cursor-pointer">
-                    Workspaces
-                </DropdownMenuItem>
+
                 {isModerator && (
                     <DropdownMenuItem onClick={()=>onOpen('invite', {server})} className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer">
                         Invite People
@@ -41,7 +36,7 @@ export const ServerHeader = ({server, role}:ServerHeaderProps) => {
                 )}
                 {isAdmin && (
                     <DropdownMenuItem onClick={()=>onOpen("editServer", {server})} className="px-3 py-2 text-sm cursor-pointer">
-                        Server Settings
+                        Organization Settings
                         <Settings className="h-4 w-4 ml-auto"/>
                     </DropdownMenuItem>
                 )}
@@ -60,7 +55,7 @@ export const ServerHeader = ({server, role}:ServerHeaderProps) => {
                 {isModerator && (<DropdownMenuSeparator/>)}
                 {isAdmin && (
                     <DropdownMenuItem onClick={()=> onOpen("deleteServer", {server})} className="px-3 py-2 text-rose-500 text-sm cursor-pointer">
-                        Delete Server
+                        Delete Organization
                         <Trash className="h-4 w-4 ml-auto"/>
                     </DropdownMenuItem>
                 )}

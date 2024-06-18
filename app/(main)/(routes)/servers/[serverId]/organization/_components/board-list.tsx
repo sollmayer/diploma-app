@@ -16,14 +16,6 @@ interface ServerIdPageProps {
 export const BoardList = async ({params}:ServerIdPageProps) => {
     const orgId = params?.serverId;
     await updateBoard(orgId)
-    // const boardsUpdated = await db.board.updateMany({
-    //     where: {
-    //       orgId:"Test3",
-    //     },
-    //     data: {
-    //         orgId: orgId,
-    //     },
-    // });
     const boards = await db.board.findMany({
         where: {
           orgId,
@@ -40,7 +32,6 @@ export const BoardList = async ({params}:ServerIdPageProps) => {
                 Your Boards
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {/* <FormPopover sideOffset={10} side="right" serverId={params.serverId}> */}
                 {boards.map((board) => (
                 <Link
                     href={`/board/${board.id}`}
@@ -56,20 +47,7 @@ export const BoardList = async ({params}:ServerIdPageProps) => {
                     <div
                     className="aspect-video relative w-full h-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
                     role="button">
-                        <p className="text-sm">Create new board</p>
-                        <span className="text-sm">
-                            5 remaining
-                        </span>
-                        <span>
-                            
-                        </span>
-                        <Hint
-                            side="bottom"
-                            sideOffset={90}
-                            description={`Free Workspaces can have up to 5 open boards. For unlimited boards upgrade this worskpace.`}
-                            >
-                            <HelpCircle className="absolute bottom-2 right-2 h-[14px] w-[14px]" />
-                        </Hint>
+                        <p className="text-base">Create new board</p>
                     </div>
                 </FormPopover>
             </div>
